@@ -1,0 +1,669 @@
+/* =========================
+   PREGO - styles.css (full replacement)
+   Drop this entire file into: /public/css/styles.css
+   ========================= */
+
+/* ---- Base / reset ---- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #f5f6f7;
+  --card: #ffffff;
+  --text: #111827;
+  --muted: #6b7280;
+
+  --border: rgba(0, 0, 0, 0.08);
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+
+  --green: #2f6b2f;
+  --green-weak: #eaf5ea;
+
+  --radius-lg: 18px;
+  --radius-md: 14px;
+  --radius-sm: 10px;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial,
+    "Apple Color Emoji", "Segoe UI Emoji";
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.35;
+}
+
+/* links */
+a {
+  color: var(--green);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* spacing helpers used in your HTML */
+.mt-sm {
+  margin-top: 10px;
+}
+
+.mt-md {
+  margin-top: 18px;
+}
+
+/* ---- Layout shell ---- */
+.page-shell {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 28px 18px 60px;
+}
+
+/* ---- Header ---- */
+.index-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.index-header h1 {
+  margin: 0;
+  font-size: 40px;
+  letter-spacing: -0.02em;
+}
+
+.index-header-sub {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.index-header a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--green);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.index-header a:hover {
+  background: rgba(47, 107, 47, 0.06);
+  text-decoration: none;
+}
+
+/* ---- Section cards ---- */
+.section-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  padding: 18px;
+  margin: 18px 0;
+}
+
+.section-card--header {
+  border-top: 3px solid var(--green);
+}
+
+.section-card h2 {
+  margin: 0 0 14px;
+  font-size: 22px;
+  letter-spacing: -0.01em;
+}
+
+/* ---- Menu grid ---- */
+.menu-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+/* responsive */
+@media (max-width: 980px) {
+  .menu-list {
+    grid-template-columns: repeat(2, minmax(240px, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .menu-list {
+    grid-template-columns: 1fr;
+  }
+
+  .index-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .header-actions {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .index-header a {
+    align-self: flex-start;
+  }
+}
+
+/* =========================
+   MENU ITEM CARD
+   ========================= */
+
+/*
+  Your HTML looks like:
+  <div class="menu-item">
+    <div class="menu-item-main">
+      <div class="menu-name">...</div>
+      <div class="menu-description">...</div>
+    </div>
+    <div class="menu-price">...</div>
+
+    (JS injects: "Not in cart" + Add button somewhere)
+  </div>
+
+  Goal:
+  - Title left, price right
+  - Status + Add in the top-right row
+  - Green description box spans FULL CARD WIDTH
+  - Names/descriptions wrap cleanly
+*/
+.menu-item {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05);
+
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-auto-rows: min-content;
+  column-gap: 12px;
+  row-gap: 10px;
+
+  /* IMPORTANT so children can wrap inside grid/flex contexts */
+  min-width: 0;
+}
+
+/* Make wrapper "transparent" so its children can participate in the grid:
+   This is the trick that lets .menu-description span 1/-1 (full width)
+   while keeping the title in column 1. */
+.menu-item-main {
+  display: contents;
+}
+
+/* Title */
+.menu-name {
+  grid-column: 1;
+  grid-row: 1;
+
+  font-weight: 800;
+  font-size: 16px;
+  letter-spacing: -0.01em;
+
+  /* wrapping */
+  white-space: normal !important;
+  overflow-wrap: anywhere;
+  word-break: normal;
+
+  min-width: 0;
+}
+
+/* Price (top-right) */
+.menu-price {
+  grid-column: 2;
+  grid-row: 1;
+
+  font-weight: 800;
+  font-size: 14px;
+  white-space: nowrap;
+  text-align: right;
+
+  align-self: start;
+  justify-self: end;
+}
+
+/* === GREEN NOTE (description) ===
+   Full width across the whole card. */
+.menu-description {
+  grid-column: 1 / -1; /* FULL WIDTH */
+  grid-row: 3;
+
+  display: block;
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: var(--green-weak);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+
+  color: var(--muted);
+  font-size: 13px;
+
+  /* wrapping */
+  white-space: normal !important;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+/* Hide empty description boxes cleanly */
+.menu-description:empty {
+  display: none !important;
+}
+
+/* =========================
+   STATUS + ADD BUTTON (JS injected)
+   ========================= */
+
+/* Many scripts inject plain text spans and a button inside .menu-item.
+   These rules are resilient even if the class names differ. */
+
+/* common candidates for status text */
+.menu-item .cart-status,
+.menu-item .status,
+.menu-item .in-cart,
+.menu-item .not-in-cart {
+  grid-column: 1;
+  grid-row: 2;
+
+  color: #9aa0a6;
+  font-size: 12px;
+  font-weight: 700;
+
+  align-self: center;
+}
+
+/* if the status is literally a <p> or <span> without class */
+.menu-item > p,
+.menu-item > span {
+  /* don’t break layout: try to place them in row 2 left */
+  grid-column: 1;
+  grid-row: 2;
+}
+
+/* style any injected button inside the card (Add) */
+.menu-item button {
+  grid-column: 2;
+  grid-row: 2;
+
+  justify-self: end;
+  align-self: center;
+
+  border: none;
+  border-radius: 999px;
+
+  padding: 8px 12px;
+  font-weight: 800;
+  font-size: 12px;
+
+  background: var(--green);
+  color: #fff;
+
+  cursor: pointer;
+  box-shadow: 0 10px 18px rgba(47, 107, 47, 0.2);
+}
+
+.menu-item button:hover {
+  filter: brightness(0.95);
+}
+
+.menu-item button:active {
+  transform: translateY(1px);
+}
+
+/* if your JS uses specific classes for the add button */
+.menu-item .add-btn,
+.menu-item .add,
+.menu-item .btn-add {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+/* If JS injects a wrapper for actions, make it sit top-right */
+.menu-item .menu-actions,
+.menu-item .actions,
+.menu-item .menu-controls {
+  grid-column: 2;
+  grid-row: 2;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* If JS injects status + button inside a wrapper, let status be left in that wrapper */
+.menu-item .menu-actions .cart-status,
+.menu-item .actions .cart-status,
+.menu-item .menu-controls .cart-status {
+  color: #9aa0a6;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+/* =========================
+   Buttons (used elsewhere)
+   ========================= */
+.primary-btn {
+  appearance: none;
+  border: none;
+  border-radius: 999px;
+  background: var(--green);
+  color: #fff;
+  padding: 10px 14px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 10px 18px rgba(47, 107, 47, 0.2);
+}
+
+.primary-btn:hover {
+  filter: brightness(0.95);
+}
+
+.primary-btn:active {
+  transform: translateY(1px);
+}
+
+.secondary-btn {
+  appearance: none;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--text);
+  padding: 10px 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.secondary-btn:hover {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.secondary-btn:active {
+  transform: translateY(1px);
+}
+
+/* =========================
+   Cart subtotal area
+   ========================= */
+#menu-subtotal {
+  font-weight: 800;
+}
+
+/* =========================
+   Extra safety: allow wrapping in nested flex/grid layouts
+   ========================= */
+.menu-item * {
+  min-width: 0;
+}
+
+/* =========================
+   Layout + helpers
+   ========================= */
+.two-col {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+}
+
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.cart-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.cart-side {
+  position: sticky;
+  top: 16px;
+}
+
+@media (max-width: 920px) {
+  .cart-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .cart-side {
+    position: static;
+  }
+}
+
+.cards-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+.cards-row .card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  box-shadow: var(--shadow);
+}
+
+.cards-row .label {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.cards-row .value {
+  margin: 6px 0 0;
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.floating-actions {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  padding: 6px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+}
+
+.floating-actions .floating-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  font-weight: 700;
+  background: #fff;
+  color: var(--text);
+  text-decoration: none;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+}
+
+.floating-actions .floating-link:hover {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.floating-actions .floating-customer {
+  background: var(--green);
+  color: #fff;
+  border: none;
+  box-shadow: 0 10px 20px rgba(47, 107, 47, 0.18);
+}
+
+.floating-actions .floating-customer:hover {
+  filter: brightness(0.95);
+}
+
+@media (max-width: 640px) {
+  .floating-actions {
+    right: 12px;
+    bottom: 12px;
+    left: 12px;
+    justify-content: center;
+  }
+}
+
+/* =========================
+   Forms
+   ========================= */
+form {
+  display: grid;
+  gap: 12px;
+}
+
+label {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+input,
+select,
+textarea {
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: #fff;
+  font-size: 14px;
+  outline: none;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px rgba(47, 107, 47, 0.12);
+}
+
+.form-card {
+  max-width: 420px;
+  width: 100%;
+}
+
+.filters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+  align-items: end;
+}
+
+.filters button {
+  justify-self: start;
+}
+
+.slot-selector-container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.time-select {
+  width: 100%;
+  max-width: 320px;
+}
+
+.form-label {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--text);
+}
+
+/* =========================
+   Tables
+   ========================= */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+table th,
+table td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+table thead th {
+  background: #f0f2f5;
+  color: var(--muted);
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+table tbody tr:hover {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+table tfoot td {
+  font-weight: 800;
+}
+
+.table {
+  width: 100%;
+}
+
+/* =========================
+   Alerts / text helpers
+   ========================= */
+.alert {
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: #f8fafc;
+  color: var(--text);
+}
+
+.alert--danger {
+  background: #fef2f2;
+  border-color: #fecaca;
+  color: #991b1b;
+}
+
+.muted {
+  color: var(--muted);
+}

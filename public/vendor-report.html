@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vendor Progress Report</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="index-header">
+      <div>
+        <h1>Progress Report</h1>
+        <p class="index-header-sub">Weekly orders and revenue trends.</p>
+      </div>
+      <div>
+        <a href="/vendor">Vendor Dashboard</a>
+      </div>
+    </header>
+
+    <section class="section-card section-card--header">
+      <div id="report-cards" class="cards-row">
+        <div class="card">
+          <p class="label">Total orders (7d)</p>
+          <p id="card-orders" class="value">-</p>
+        </div>
+        <div class="card">
+          <p class="label">Revenue (7d)</p>
+          <p id="card-revenue" class="value">-</p>
+        </div>
+        <div class="card">
+          <p class="label">Avg / day</p>
+          <p id="card-avg" class="value">-</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <h2>Orders per day (7d)</h2>
+      <div id="report-error" class="alert alert--danger" style="display:none;"></div>
+      <canvas id="orders-chart" height="160"></canvas>
+      <table class="table mt-md">
+        <thead>
+          <tr>
+            <th>Day</th>
+            <th>Orders</th>
+            <th>Revenue</th>
+          </tr>
+        </thead>
+        <tbody id="report-table-body"></tbody>
+      </table>
+    </section>
+  </div>
+
+  <script src="/js/vendorReport.js"></script>
+</body>
+</html>

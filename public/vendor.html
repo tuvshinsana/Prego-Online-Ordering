@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vendor Dashboard</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="index-header">
+      <div>
+        <h1>Vendor Dashboard</h1>
+        <p class="index-header-sub">View orders and mark READY orders as done.</p>
+      </div>
+      <div>
+        <a href="/staff/login">Staff login</a>
+      </div>
+    </header>
+
+    <section class="section-card section-card--header">
+      <h2>Orders</h2>
+      <div id="vendor-error" class="alert alert--danger" style="display:none;"></div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Order</th>
+            <th>Student</th>
+            <th>Pickup slot</th>
+            <th>Status</th>
+            <th>Subtotal</th>
+            <th>Created</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="vendor-orders-body"></tbody>
+      </table>
+      <p id="vendor-empty" class="mt-sm" style="display:none;">No orders found.</p>
+    </section>
+  </div>
+
+  <script src="/js/vendorOrders.js"></script>
+</body>
+</html>

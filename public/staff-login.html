@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prego Staff Login</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="index-header">
+      <div>
+        <h1>Staff login</h1>
+        <p class="index-header-sub">Sign in to manage orders.</p>
+      </div>
+      <a href="/">Back to home</a>
+    </header>
+
+    <section class="section-card section-card--header">
+      <form id="staff-login-form" class="form-card">
+        <label for="staff-username">
+          Username
+          <input type="text" id="staff-username" required>
+        </label>
+        <label for="staff-password">
+          Password
+          <input type="password" id="staff-password" required>
+        </label>
+        <button type="submit" class="primary-btn">Login</button>
+      </form>
+      <p id="staff-login-error" class="mt-sm"></p>
+    </section>
+  </div>
+
+  <script src="/js/staff.js"></script>
+  <script src="/js/vendorLink.js"></script>
+</body>
+</html>

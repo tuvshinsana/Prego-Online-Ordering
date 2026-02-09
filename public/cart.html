@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Your Cart</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="index-header">
+      <div>
+        <h1>Your Cart</h1>
+        <p class="index-header-sub">
+          Review items and choose a pickup time before confirming.
+        </p>
+      </div>
+
+      <a href="/order/menu">Back to menu</a>
+    </header>
+
+    <div class="cart-layout">
+      <!-- Left: table with items -->
+      <section class="section-card cart-panel section-card--header">
+        <h2>Selected items</h2>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Qty</th>
+              <th>Price</th>
+              <th>Total</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="cart-body">
+            <!-- cart.js will fill rows here -->
+          </tbody>
+          <tfoot>
+            <tr class="cart-total-row">
+              <td colspan="3">Subtotal</td>
+              <td colspan="2">₱<span id="cart-subtotal">0.00</span></td>
+            </tr>
+          </tfoot>
+        </table>
+      </section>
+
+      <!-- Right: order details / pickup time / ID -->
+      <aside class="section-card cart-side section-card--header">
+        <h2>Order details</h2>
+        <p>
+          When you’re ready, click <strong>Choose pickup time</strong>,
+          enter your student ID, then confirm.
+        </p>
+
+        <button id="cart-slot-btn" class="primary-btn mt-md">
+          Choose pickup time
+        </button>
+
+        <p class="mt-sm">
+          After confirming, please pay at the Prego counter with your ID.
+        </p>
+      </aside>
+    </div>
+  </div>
+
+  <script src="/js/cart.js"></script>
+  <script src="/js/vendorLink.js"></script>
+</body>
+</html>

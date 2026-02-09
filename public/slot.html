@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Choose Pickup Time</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="index-header">
+      <div>
+        <h1>Choose pickup date & time</h1>
+        <p class="index-header-sub">Order anytime; pick a 15-minute slot between 7:00 AM and 5:00 PM.</p>
+      </div>
+      <a href="/order/cart">Back to cart</a>
+    </header>
+
+    <section class="section-card section-card--header">
+      <div class="slot-selector-container">
+        <label for="pickup-date-select" class="form-label">Select pickup date:</label>
+        <select id="pickup-date-select" class="time-select">
+          <option value="">-- Select a date --</option>
+        </select>
+      </div>
+      <div class="slot-selector-container mt-sm">
+        <label for="pickup-time-select" class="form-label">Select pickup time:</label>
+        <select id="pickup-time-select" class="time-select">
+          <option value="">-- Select a time --</option>
+        </select>
+      </div>
+      <div id="slot-list" class="mt-md"></div>
+      <button id="slot-confirm-btn" class="primary-btn mt-md" disabled>Continue</button>
+      <div id="slot-info" class="mt-sm"></div>
+    </section>
+  </div>
+
+  <script src="/js/slot.js"></script>
+  <script src="/js/vendorLink.js"></script>
+</body>
+</html>

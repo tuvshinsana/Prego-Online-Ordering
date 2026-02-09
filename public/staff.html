@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prego Staff Orders</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="index-header">
+      <div>
+        <h1>Staff – Orders</h1>
+        <p class="index-header-sub">View and advance orders along the allowed path.</p>
+      </div>
+      <div>
+        <button id="staff-logout-btn" class="secondary-btn" type="button">Logout</button>
+      </div>
+    </header>
+
+    <section class="section-card section-card--header">
+      <h2>Filters</h2>
+      <div class="filters">
+        <label>Status
+          <select id="filter-status">
+            <option value="">Any</option>
+            <option value="PENDING">PENDING</option>
+            <option value="PAID">PAID</option>
+            <option value="PREPARING">PREPARING</option>
+            <option value="READY">READY</option>
+            <option value="COMPLETED">COMPLETED</option>
+            <option value="CANCELED">CANCELED</option>
+          </select>
+        </label>
+        <label>Date
+          <input type="date" id="filter-date">
+        </label>
+        <label>Slot
+          <input type="text" id="filter-slot" placeholder="S1">
+        </label>
+        <label>Student ID
+          <input type="text" id="filter-student">
+        </label>
+        <button id="filter-apply-btn" class="primary-btn">Apply</button>
+      </div>
+    </section>
+
+    <section class="section-card section-card--header">
+      <h2>Orders</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Order</th>
+            <th>Student</th>
+            <th>Slot</th>
+            <th>Status</th>
+            <th>Subtotal</th>
+            <th>Created</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="staff-orders-body"></tbody>
+      </table>
+      <p id="staff-orders-empty" class="mt-sm" style="display:none;">No orders found.</p>
+    </section>
+
+    <section class="section-card">
+      <h2>Order detail</h2>
+      <div id="staff-order-detail">Select an order to view items.</div>
+    </section>
+  </div>
+
+  <script src="/js/staff.js"></script>
+  <script src="/js/vendorLink.js"></script>
+</body>
+</html>

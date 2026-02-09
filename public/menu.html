@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prego Menu</title>
+  <link rel="stylesheet" href="/css/styles.css">
+
+  <style>
+    /* === Fix wrapping + keep price consistently top-right ===
+       Uses CSS Grid so the price stays in its column even when
+       descriptions/buttons are missing or injected by JS. */
+
+    .menu-item{
+      display: grid;
+      grid-template-columns: 1fr auto;
+      column-gap: 12px;
+      row-gap: 6px;
+      align-items: start;
+    }
+
+    .menu-item-main{
+      min-width: 0; /* IMPORTANT for wrapping */
+    }
+
+    .menu-price{
+      white-space: nowrap;
+      text-align: right;
+      font-weight: 600;
+      align-self: start;
+      justify-self: end;
+    }
+
+    /* Any JS-injected controls/status lines should span full width */
+    .menu-item > :not(.menu-item-main):not(.menu-price){
+      grid-column: 1 / -1;
+    }
+
+    .menu-name,
+    .menu-description{
+      white-space: normal !important;
+      overflow-wrap: anywhere;
+      word-break: normal;
+      line-height: 1.25;
+    }
+
+    .menu-name{ font-weight: 700; }
+    .menu-description{ opacity: 0.85; margin-top: 4px; }
+
+    /* Extra safety if some parent CSS forces odd sizing */
+    .menu-item *{ min-width: 0; }
+  </style>
+</head>
+
+<body>
+  <div class="page-shell">
+    <header class="index-header">
+      <div>
+        <h1>Menu</h1>
+        <p class="index-header-sub">Choose dishes to add to your cart, then confirm your order.</p>
+      </div>
+      <a href="/order/cart">Go to cart</a>
+    </header>
+
+    <main>
+      <section class="section-card section-card--header">
+        <h2>PASTA</h2>
+        <div class="menu-list">
+          <div class="menu-item" data-id="PA1" data-name="Vegetarian Lasagna" data-price="205">
+            <div class="menu-item-main">
+              <div class="menu-name">Vegetarian Lasagna</div>
+              <div class="menu-description">Baked eggplant lasagna with tomato sauce, mozzarella &amp; parmesan.</div>
+            </div>
+            <div class="menu-price">205</div>
+          </div>
+
+          <div class="menu-item" data-id="PA2" data-name="Ravioli Spinach" data-price="225">
+            <div class="menu-item-main">
+              <div class="menu-name">Ravioli Spinach</div>
+              <div class="menu-description">Ravioli filled with spinach and ricotta cheese in creamy tomato sauce.</div>
+            </div>
+            <div class="menu-price">225</div>
+          </div>
+
+          <div class="menu-item" data-id="PA3" data-name="Meat Lasagna" data-price="225">
+            <div class="menu-item-main">
+              <div class="menu-name">Meat Lasagna</div>
+              <div class="menu-description">Classic Italian meat lasagna.</div>
+            </div>
+            <div class="menu-price">225</div>
+          </div>
+
+          <div class="menu-item" data-id="PA4" data-name="Pasta with Meat Balls" data-price="225">
+            <div class="menu-item-main">
+              <div class="menu-name">Pasta with Meat Balls</div>
+              <div class="menu-description"></div>
+            </div>
+            <div class="menu-price">225</div>
+          </div>
+
+          <div class="menu-item" data-id="PA5" data-name="Spaghetti Aglio Olio with Shrimp" data-price="225">
+            <div class="menu-item-main">
+              <div class="menu-name">Spaghetti Aglio Olio with Shrimp</div>
+              <div class="menu-description"></div>
+            </div>
+            <div class="menu-price">225</div>
+          </div>
+
+          <div class="menu-item" data-id="PA6" data-name="Pasta al Pesto" data-price="215">
+            <div class="menu-item-main">
+              <div class="menu-name">Pasta al Pesto</div>
+              <div class="menu-description">Pasta in our home-made pesto sauce.</div>
+            </div>
+            <div class="menu-price">215</div>
+          </div>
+
+          <div class="menu-item" data-id="PA7" data-name="Carbonara" data-price="215">
+            <div class="menu-item-main">
+              <div class="menu-name">Carbonara</div>
+              <div class="menu-description">Spaghetti with bacon, cheese and cream sauce.</div>
+            </div>
+            <div class="menu-price">215</div>
+          </div>
+
+          <div class="menu-item" data-id="PA8" data-name="Arrabbiata" data-price="215">
+            <div class="menu-item-main">
+              <div class="menu-name">Arrabbiata</div>
+              <div class="menu-description">Penne pasta in our spicy tomato sauce.</div>
+            </div>
+            <div class="menu-price">215</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-card section-card--header">
+        <h2>PIZZA</h2>
+        <div class="menu-list">
+          <div class="menu-item" data-id="PI1" data-name="Margherita" data-price="125">
+            <div class="menu-item-main">
+              <div class="menu-name">Margherita</div>
+              <div class="menu-description">Tomato sauce, mozzarella cheese and fresh basil.</div>
+            </div>
+            <div class="menu-price">125</div>
+          </div>
+
+          <div class="menu-item" data-id="PI2" data-name="Capricciosa" data-price="140">
+            <div class="menu-item-main">
+              <div class="menu-name">Capricciosa</div>
+              <div class="menu-description">Tomato sauce, mozzarella cheese, ham, mushroom &amp; olives.</div>
+            </div>
+            <div class="menu-price">140</div>
+          </div>
+
+          <div class="menu-item" data-id="PI3" data-name="Vegetariana" data-price="140">
+            <div class="menu-item-main">
+              <div class="menu-name">Vegetariana</div>
+              <div class="menu-description">Tomato sauce, mozzarella cheese and grilled vegetables.</div>
+            </div>
+            <div class="menu-price">140</div>
+          </div>
+
+          <div class="menu-item" data-id="PI4" data-name="Pepperoni" data-price="140">
+            <div class="menu-item-main">
+              <div class="menu-name">Pepperoni</div>
+              <div class="menu-description">Tomato sauce, mozzarella cheese, pepperoni salami.</div>
+            </div>
+            <div class="menu-price">140</div>
+          </div>
+
+          <div class="menu-item" data-id="PI5" data-name="Pizza Bianca" data-price="170">
+            <div class="menu-item-main">
+              <div class="menu-name">Pizza Bianca</div>
+              <div class="menu-description">Mozzarella, parmesan and cream cheese.</div>
+            </div>
+            <div class="menu-price">170</div>
+          </div>
+
+          <div class="menu-item" data-id="PI6" data-name="Calzone Stromboli" data-price="150">
+            <div class="menu-item-main">
+              <div class="menu-name">Calzone Stromboli</div>
+              <div class="menu-description">Folded pizza filled with mozzarella, tomato sauce, ham &amp; mushrooms.</div>
+            </div>
+            <div class="menu-price">150</div>
+          </div>
+
+          <div class="menu-item" data-id="PI7" data-name="Pizzino Salame" data-price="170">
+            <div class="menu-item-main">
+              <div class="menu-name">Pizzino Salame</div>
+              <div class="menu-description">Rolled pizza with cheese, tomatoes and pepperoni salami.</div>
+            </div>
+            <div class="menu-price">170</div>
+          </div>
+
+          <div class="menu-item" data-id="PI8" data-name="Focaccia al Tonno" data-price="185">
+            <div class="menu-item-main">
+              <div class="menu-name">Focaccia al Tonno</div>
+              <div class="menu-description">Focaccia filled with lettuce, tomatoes, tuna &amp; mayonnaise.</div>
+            </div>
+            <div class="menu-price">185</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-card section-card--header">
+        <h2>STREET FOOD / MAIN</h2>
+        <div class="menu-list">
+          <div class="menu-item" data-id="SF1" data-name="Arancini" data-price="145">
+            <div class="menu-item-main">
+              <div class="menu-name">Arancini</div>
+              <div class="menu-description">Breaded &amp; fried risotto balls filled with cheese and meat sauce.</div>
+            </div>
+            <div class="menu-price">145</div>
+          </div>
+
+          <div class="menu-item" data-id="SF2" data-name="Arancini Vegetariani" data-price="140">
+            <div class="menu-item-main">
+              <div class="menu-name">Arancini Vegetariani</div>
+              <div class="menu-description">Breaded &amp; fried risotto balls filled with spinach and cheese.</div>
+            </div>
+            <div class="menu-price">140</div>
+          </div>
+
+          <div class="menu-item" data-id="SF3" data-name="Crispy Chicken Fillet" data-price="145">
+            <div class="menu-item-main">
+              <div class="menu-name">Crispy Chicken Fillet</div>
+              <div class="menu-description">Crispy chicken strips with Pomodoro sauce (3 pcs).</div>
+            </div>
+            <div class="menu-price">145</div>
+          </div>
+
+          <div class="menu-item" data-id="SF4" data-name="Crispy Chicken Fillet with Pasta" data-price="145">
+            <div class="menu-item-main">
+              <div class="menu-name">Crispy Chicken Fillet with Pasta</div>
+              <div class="menu-description">Crispy chicken fillet with choice of pasta: Alfredo / Pomodoro / Aglio Olio (3 pcs).</div>
+            </div>
+            <div class="menu-price">145</div>
+          </div>
+
+          <div class="menu-item" data-id="SF5" data-name="Calamari" data-price="160">
+            <div class="menu-item-main">
+              <div class="menu-name">Calamari</div>
+              <div class="menu-description">Fried calamari rings served with tartare sauce.</div>
+            </div>
+            <div class="menu-price">160</div>
+          </div>
+
+          <div class="menu-item" data-id="SF6" data-name="Chicken Parmigiana" data-price="255">
+            <div class="menu-item-main">
+              <div class="menu-name">Chicken Parmigiana</div>
+              <div class="menu-description">Breaded chicken breast filled with cheese and spinach.</div>
+            </div>
+            <div class="menu-price">255</div>
+          </div>
+
+          <div class="menu-item" data-id="SF7" data-name="Chicken Parmigiana with Pasta" data-price="345">
+            <div class="menu-item-main">
+              <div class="menu-name">Chicken Parmigiana with Pasta</div>
+              <div class="menu-description">Chicken Parmigiana served with choice of pasta: Alfredo / Pomodoro / Aglio Olio.</div>
+            </div>
+            <div class="menu-price">345</div>
+          </div>
+
+          <div class="menu-item" data-id="SF8" data-name="Mozzarella in Carrozza" data-price="175">
+            <div class="menu-item-main">
+              <div class="menu-name">Mozzarella in Carrozza</div>
+              <div class="menu-description">Mozzarella sandwich breaded &amp; fried with tomato sauce &amp; anchovies.</div>
+            </div>
+            <div class="menu-price">175</div>
+          </div>
+
+          <div class="menu-item" data-id="SF9" data-name="Mozzarella Sticks" data-price="165">
+            <div class="menu-item-main">
+              <div class="menu-name">Mozzarella Sticks</div>
+              <div class="menu-description">Breaded mozzarella with tomato salsa on the side.</div>
+            </div>
+            <div class="menu-price">165</div>
+          </div>
+
+          <div class="menu-item" data-id="SF10" data-name="Potato Chips (Regular)" data-price="95">
+            <div class="menu-item-main">
+              <div class="menu-name">Potato Chips (Regular)</div>
+              <div class="menu-description">Plain 95 · Flavored 100 (BBQ / Cheese / Sour &amp; Cream).</div>
+            </div>
+            <div class="menu-price">95–100</div>
+          </div>
+
+          <div class="menu-item" data-id="SF11" data-name="Potato Chips (Large)" data-price="170">
+            <div class="menu-item-main">
+              <div class="menu-name">Potato Chips (Large)</div>
+              <div class="menu-description">Plain 170 · Flavored 180 (BBQ / Cheese / Sour &amp; Cream).</div>
+            </div>
+            <div class="menu-price">170–180</div>
+          </div>
+
+          <div class="menu-item" data-id="SF12" data-name="Crispy Meatballs" data-price="175">
+            <div class="menu-item-main">
+              <div class="menu-name">Crispy Meatballs</div>
+              <div class="menu-description">Meatballs (pork &amp; beef, 4 pcs) with parmesan cheese and pomodoro sauce.</div>
+            </div>
+            <div class="menu-price">175</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-card section-card--header">
+        <h2>DESSERT / DRINKS</h2>
+        <div class="menu-list">
+          <div class="menu-item" data-id="DE1" data-name="Chocolate Mousse" data-price="120">
+            <div class="menu-item-main">
+              <div class="menu-name">Chocolate Mousse</div>
+              <div class="menu-description"></div>
+            </div>
+            <div class="menu-price">120</div>
+          </div>
+
+          <div class="menu-item" data-id="DE2" data-name="Crepe Nutella" data-price="135">
+            <div class="menu-item-main">
+              <div class="menu-name">Crepe Nutella</div>
+              <div class="menu-description">Served with whipped cream.</div>
+            </div>
+            <div class="menu-price">135</div>
+          </div>
+
+          <div class="menu-item" data-id="DE3" data-name="Crepe Blueberry" data-price="135">
+            <div class="menu-item-main">
+              <div class="menu-name">Crepe Blueberry</div>
+              <div class="menu-description">Served with whipped cream.</div>
+            </div>
+            <div class="menu-price">135</div>
+          </div>
+
+          <div class="menu-item" data-id="DE4" data-name="Crepe Mango" data-price="135">
+            <div class="menu-item-main">
+              <div class="menu-name">Crepe Mango</div>
+              <div class="menu-description">Served with whipped cream.</div>
+            </div>
+            <div class="menu-price">135</div>
+          </div>
+
+          <div class="menu-item" data-id="DE5" data-name="Gatorade 16oz" data-price="85">
+            <div class="menu-item-main">
+              <div class="menu-name">Gatorade 16oz</div>
+              <div class="menu-description"></div>
+            </div>
+            <div class="menu-price">85</div>
+          </div>
+
+          <div class="menu-item" data-id="DE6" data-name="Home-made Iced Tea 16oz" data-price="95">
+            <div class="menu-item-main">
+              <div class="menu-name">Home-made Iced Tea 16oz</div>
+              <div class="menu-description"></div>
+            </div>
+            <div class="menu-price">95</div>
+          </div>
+
+          <div class="menu-item" data-id="DE7" data-name="Home-made Calamansi Juice 16oz" data-price="95">
+            <div class="menu-item-main">
+              <div class="menu-name">Home-made Calamansi Juice 16oz</div>
+              <div class="menu-description"></div>
+            </div>
+            <div class="menu-price">95</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-card">
+        <p><strong>Cart subtotal:</strong> ₱<span id="menu-subtotal">0.00</span></p>
+        <button id="menu-cart-btn" class="primary-btn mt-sm">Go to cart</button>
+      </section>
+
+      <p class="mt-md">
+        <a href="index.html">Back to main page</a>
+      </p>
+    </main>
+  </div>
+
+  <script src="/js/menu.js"></script>
+  <script src="/js/vendorLink.js"></script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Student ID</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="index-header">
+      <div>
+        <h1>Enter your student ID</h1>
+        <p class="index-header-sub">ID and name are required to place your order.</p>
+      </div>
+      <div>
+        <a href="/vendor">Vendor dashboard</a>
+      </div>
+    </header>
+
+    <section class="section-card">
+      <form id="id-form">
+        <div class="two-col">
+          <div>
+            <label for="student-id">Student ID (6 digits)</label>
+            <input type="text" id="student-id" placeholder="e.g., 123456" required>
+          </div>
+          <div>
+            <label for="student-name">Name (required)</label>
+            <input type="text" id="student-name" placeholder="Your full name" required>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="primary-btn">Continue</button>
+          <a href="/order/slot">Back to pickup time</a>
+        </div>
+      </form>
+    </section>
+  </div>
+
+  <script src="/js/id.js"></script>
+  <script src="/js/vendorLink.js"></script>
+</body>
+</html>

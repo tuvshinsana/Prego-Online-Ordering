@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Review Order</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="index-header">
+      <div>
+        <h1>Review your order</h1>
+        <p class="index-header-sub">Confirm items, pickup slot, and student ID.</p>
+      </div>
+      <a href="/order/id">Back to ID</a>
+    </header>
+
+    <section class="section-card section-card--header">
+      <h2>Items</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Qty</th>
+            <th>Price</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody id="review-cart-body"></tbody>
+      </table>
+      <p class="mt-sm"><strong>Subtotal:</strong> ₱<span id="review-subtotal">0.00</span></p>
+    </section>
+
+    <div class="two-col mt-md">
+      <section class="section-card">
+        <h2>Pickup time</h2>
+        <p id="review-slot"></p>
+      </section>
+      <section class="section-card">
+        <h2>Student</h2>
+        <p id="review-student"></p>
+      </section>
+    </div>
+
+    <button id="place-order-btn" class="primary-btn mt-md">Place order</button>
+  </div>
+
+  <script src="/js/review.js"></script>
+  <script src="/js/vendorLink.js"></script>
+</body>
+</html>
